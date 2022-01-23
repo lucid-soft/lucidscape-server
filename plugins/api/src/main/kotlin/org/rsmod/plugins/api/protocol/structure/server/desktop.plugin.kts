@@ -132,6 +132,38 @@ packets.register<UpdateStat> {
     }
 }
 
+packets.register<UpdateInvFull> {
+    opcode = 54
+    length = PacketLength.Short
+    write {
+        it.writeInt(component)
+        it.writeShort(key)
+        it.writeShort(items.size)
+        it.writeFullItemContainer(items)
+    }
+}
+
+packets.register<UpdateInvPartial> {
+    opcode = 11
+    length = PacketLength.Short
+    write {
+        it.writeInt(component)
+        it.writeShort(key)
+        it.writePartialItemContainer(updated)
+    }
+}
+
+packets.register<IfSetEvents> {
+    opcode = 71
+    length = PacketLength.Fixed
+    write {
+        it.writeIntIME(events)
+        it.writeInt(component)
+        it.writeShort(dynamic.last)
+        it.writeShortAdd(dynamic.first)
+    }
+}
+
 //
 //packets.register<NpcInfoSmallViewport> {
 //    opcode = 43
@@ -143,26 +175,6 @@ packets.register<UpdateStat> {
 //
 //val logger = InlineLogger()
 //
-//packets.register<UpdateInvFull> {
-//    opcode = 13
-//    length = PacketLength.Short
-//    write {
-//        it.writeInt(component)
-//        it.writeShort(key)
-//        it.writeShort(items.size)
-//        it.writeFullItemContainer(items)
-//    }
-//}
-//
-//packets.register<UpdateInvPartial> {
-//    opcode = 69
-//    length = PacketLength.Short
-//    write {
-//        it.writeInt(component)
-//        it.writeShort(key)
-//        it.writePartialItemContainer(updated)
-//    }
-//}
 
 fun xteasBuffer(viewport: List<MapSquare>, xteasRepository: XteaRepository): ByteBuf {
     val buf = Unpooled.buffer(Short.SIZE_BYTES + (Int.SIZE_BYTES * 4 * 4))
@@ -178,11 +190,11 @@ fun ByteBuf.writeFullItemContainer(items: List<Item?>) {
     items.forEach { item ->
         val id = (item?.id ?: -1) + 1
         val amount = (item?.amount ?: 0)
-        writeByte(min(255, amount))
+        writeByteNeg(min(255, amount))
         if (amount >= 255) {
             writeIntME(item?.amount ?: 0)
         }
-        writeShortAddLE(id)
+        writeShortLE(id)
     }
 }
 

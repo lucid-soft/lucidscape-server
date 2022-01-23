@@ -4,6 +4,7 @@ import com.github.michaelbull.logging.InlineLogger
 import io.guthix.buffer.*
 import org.rsmod.game.message.ClientPacket
 import org.rsmod.plugins.api.protocol.Device
+import org.rsmod.plugins.api.protocol.packet.ItemAction
 import org.rsmod.plugins.api.protocol.packet.client.*
 import org.rsmod.plugins.api.protocol.structure.DevicePacketStructureMap
 
@@ -35,11 +36,69 @@ packets.register<MoveMinimapClick> {
         MoveMinimapClick(x, y, type)
     }
 }
-
-packets.register<ClientPacket> {
-    opcode = 0
-    length = 0
+packets.register<IfButton> {
+    val typeOpcodes = listOf(17, 18, 19, 0, 39, 26, 91, 47, 25)
+    addOpcodes(typeOpcodes)
+    opcode = 22
+    length = 8
+    handler = IfButtonHandler::class
+    read { opcode ->
+        val type = typeOpcodes.indexOf(opcode) + IfButton.TYPE_INDEX_OFFSET
+        val component = readInt()
+        val slot = readShort().toInt()
+        val item = readShort().toInt()
+        IfButton(type, component, slot, item)
+    }
 }
+packets.register<ClientCheat> {
+    opcode = 57
+    length = -1
+    handler = ClientCheatHandler::class
+    read {
+        val input = readStringCP1252()
+        ClientCheat(input)
+    }
+}
+
+packets.register<OpHeld1> {
+    opcode = 94
+    length = 8
+    handler = OpHeld1Handler::class
+    read {
+        val item = readUnsignedShortAdd()
+        val slot = readUnsignedShortAdd()
+        val component = readUnsignedIntIME().toInt()
+        logger.debug { "OpHeld1($item, $component, $slot)" }
+        OpHeld1(item, component, slot)
+    }
+}
+
+packets.register<OpHeld6> {
+    opcode = 7
+    length = 2
+    handler = OpHeld6Handler::class
+    read {
+        val item = readUnsignedShortAddLE()
+        OpHeld6(item)
+    }
+}
+
+packets.register<PublicChat> {
+    opcode = 95
+    length = -1
+    handler = PublicChatHandler::class
+    read {
+        val unknown = readByte()
+        val color = readByte().toInt()
+        val effect = readByte().toInt()
+        val length = readByte().toInt()
+        val data = ByteArray(readableBytes()).apply { readBytes(this) }
+        val type = readByte().toInt()
+        //logger.debug { "PublicChat(effect=$effect, color=$color, length=$length, type=$type, data=$data)" }
+        PublicChat(effect, color, length, data, type)
+    }
+}
+
 packets.register<ClientPacket> {
     opcode = 1
     length = -1
@@ -63,10 +122,6 @@ packets.register<ClientPacket> {
 packets.register<ClientPacket> {
     opcode = 6
     length = 7
-}
-packets.register<ClientPacket> {
-    opcode = 7
-    length = 2
 }
 packets.register<ClientPacket> {
     opcode = 8
@@ -105,18 +160,6 @@ packets.register<ClientPacket> {
     length = 10
 }
 packets.register<ClientPacket> {
-    opcode = 17
-    length = 8
-}
-packets.register<ClientPacket> {
-    opcode = 18
-    length = 8
-}
-packets.register<ClientPacket> {
-    opcode = 19
-    length = 8
-}
-packets.register<ClientPacket> {
     opcode = 20
     length = 4
 }
@@ -125,24 +168,12 @@ packets.register<ClientPacket> {
     length = 2
 }
 packets.register<ClientPacket> {
-    opcode = 22
-    length = 8
-}
-packets.register<ClientPacket> {
     opcode = 23
     length = 3
 }
 packets.register<ClientPacket> {
     opcode = 24
     length = 13
-}
-packets.register<ClientPacket> {
-    opcode = 25
-    length = 8
-}
-packets.register<ClientPacket> {
-    opcode = 26
-    length = 8
 }
 packets.register<ClientPacket> {
     opcode = 27
@@ -193,10 +224,6 @@ packets.register<ClientPacket> {
     length = 4
 }
 packets.register<ClientPacket> {
-    opcode = 39
-    length = 8
-}
-packets.register<ClientPacket> {
     opcode = 40
     length = -1
 }
@@ -223,10 +250,6 @@ packets.register<ClientPacket> {
 packets.register<ClientPacket> {
     opcode = 46
     length = 3
-}
-packets.register<ClientPacket> {
-    opcode = 47
-    length = 8
 }
 packets.register<ClientPacket> {
     opcode = 48
@@ -263,10 +286,6 @@ packets.register<ClientPacket> {
 packets.register<ClientPacket> {
     opcode = 56
     length = 4
-}
-packets.register<ClientPacket> {
-    opcode = 57
-    length = -1
 }
 packets.register<ClientPacket> {
     opcode = 58
@@ -397,24 +416,12 @@ packets.register<ClientPacket> {
     length = 7
 }
 packets.register<ClientPacket> {
-    opcode = 91
-    length = 8
-}
-packets.register<ClientPacket> {
     opcode = 92
     length = 15
 }
 packets.register<ClientPacket> {
     opcode = 93
     length = 8
-}
-packets.register<ClientPacket> {
-    opcode = 94
-    length = 8
-}
-packets.register<ClientPacket> {
-    opcode = 95
-    length = -1
 }
 packets.register<ClientPacket> {
     opcode = 97

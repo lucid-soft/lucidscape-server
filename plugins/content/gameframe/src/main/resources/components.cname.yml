@@ -22,7 +22,13 @@
   child: 30
 - name: run_orb_button
   parent: frame_orbs
-  child: 22
+  child: 23
+- name: run_setting_toggle_button
+  parent: settings_tab
+  child: 71
 - name: logout_button
   parent: logout_tab
   child: 8
+- name: display_mode_quick
+  parent: settings_tab
+  child: 25

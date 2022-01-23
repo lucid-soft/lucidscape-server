@@ -40,6 +40,14 @@ class GameSessionDecoder(
     private fun ByteBuf.readOpcode(channel: Channel, out: MutableList<Any>) {
         opcode = readModifiedOpcode()
         val structure = structures[opcode]
+
+        // 52 = Key down
+        // 61 = Mouse click
+        val filteredOpcodes = listOf(62, 52, 61, 40)
+        if(!filteredOpcodes.contains(opcode)) {
+            logger.debug { "Reading opcode: $opcode" }
+        }
+
         if (structure == null) {
             logger.error { "Structure for packet not defined (opcode=$opcode, channel=$channel)" }
             skipBytes(readableBytes())

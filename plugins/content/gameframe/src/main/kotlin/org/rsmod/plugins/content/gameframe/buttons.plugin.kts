@@ -12,9 +12,11 @@ val runVarp = varp("run_state")
 
 val logout = component("logout_button")
 val runOrb = component("run_orb_button")
+val runToggle = component("run_setting_toggle_button")
 
 onButton(logout) { player.logout() }
 onButton(runOrb) { player.toggleRun() }
+onButton(runToggle) { player.toggleRun() }
 
 fun Player.toggleRun() {
     toggleVarp(runVarp)
