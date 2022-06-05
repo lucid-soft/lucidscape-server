@@ -1,6 +1,10 @@
 # RuneLite Plugin Hub
 Follow the steps below if you want to set up your own RuneLite Plugin Hub and activate it in your copy of RuneLite.
 
+**Also! A huge thanks to [Spooky](https://www.rune-server.ee/members/spooky/) for contributing the source code used in here.**
+
+---
+
 ### Requirements
 - HTTP Server
 - Access to OpenSSL (which I guess most operating systems has these days)
