@@ -26,6 +26,12 @@ tasks.register<JavaExec>("cache-pack") {
     args = emptyList()
 }
 
+tasks.register<JavaExec>("generate-name-lists") {
+    main = "org.rsmod.plugins.api.cache.name.NameGenerator"
+    classpath = sourceSets.main.get().runtimeClasspath
+    args = emptyList()
+}
+
 tasks.register<JavaExec>("pack-items") {
     main = "org.rsmod.plugins.api.cache.packer.ConfigTypePacker"
     classpath = sourceSets.main.get().runtimeClasspath

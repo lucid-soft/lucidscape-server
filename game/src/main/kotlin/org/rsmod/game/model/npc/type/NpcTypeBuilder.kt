@@ -17,6 +17,15 @@ private const val DEFAULT_RENDER_PRIORITY = false
 private const val DEFAULT_VARP = -1
 private const val DEFAULT_VARBIT = -1
 private const val DEFAULT_TRANSFORM = -1
+private const val DEFAULT_FAMILIAR = false
+private const val DEFAULT_RUN_ANIMATION = -1
+private const val DEFAULT_RUN_ROTATE_180_ANIMATION = -1
+private const val DEFAULT_RUN_ROTATE_LEFT_ANIMATION = -1
+private const val DEFAULT_RUN_ROTATE_RIGHT_ANIMATION = -1
+private const val DEFAULT_CRAWL_ANIMATION = -1
+private const val DEFAULT_CRAWL_ROTATE_180_ANIMATION = -1
+private const val DEFAULT_CRAWL_ROTATE_LEFT_ANIMATION = -1
+private const val DEFAULT_CRAWL_ROTATE_RIGHT_ANIMATION = -1
 
 private val DEFAULT_OPTIONS = emptyArray<String?>()
 private val DEFAULT_TRANSFORMS = emptyArray<Int>()
@@ -65,7 +74,15 @@ class NpcTypeBuilder(
     var resizeY: Int = DEFAULT_RESIZE,
     var contrast: Int = DEFAULT_CONTRAST,
     var ambient: Int = DEFAULT_AMBIENT,
-    var aBoolean3532: Boolean = false,
+    var familiar: Boolean = DEFAULT_FAMILIAR,
+    var runAnimation: Int = DEFAULT_RUN_ANIMATION,
+    var runRotate180Animation: Int = DEFAULT_RUN_ROTATE_180_ANIMATION,
+    var runRotateLeftAnimation: Int = DEFAULT_RUN_ROTATE_LEFT_ANIMATION,
+    var runRotateRightAnimation: Int = DEFAULT_RUN_ROTATE_RIGHT_ANIMATION,
+    var crawlAnimation: Int = DEFAULT_CRAWL_ANIMATION,
+    var crawlRotate180Animation: Int = DEFAULT_CRAWL_ROTATE_180_ANIMATION,
+    var crawlRotateLeftAnimation: Int = DEFAULT_CRAWL_ROTATE_LEFT_ANIMATION,
+    var crawlRotateRightAnimation: Int = DEFAULT_CRAWL_ROTATE_RIGHT_ANIMATION,
     var parameters: Map<Int, Any> = DEFAULT_PARAMETERS
 ) {
 
@@ -107,7 +124,15 @@ class NpcTypeBuilder(
             resizeY = resizeY,
             contrast = contrast,
             ambient = ambient,
-            aBoolean3532 = aBoolean3532,
+            familiar = familiar,
+            runAnimation = runAnimation,
+            runRotate180Animation = runRotate180Animation,
+            runRotateLeftAnimation = runRotateLeftAnimation,
+            runRotateRightAnimation = runRotateRightAnimation,
+            crawlAnimation = crawlAnimation,
+            crawlRotate180Animation = crawlRotate180Animation,
+            crawlRotateLeftAnimation = crawlRotateLeftAnimation,
+            crawlRotateRightAnimation = crawlRotateRightAnimation,
             intParameters = parameters.filter { it.value is Int }.mapValues { it.value as Int },
             strParameters = parameters.filter { it.value is String }.mapValues { it.value as String }
         )
@@ -146,6 +171,7 @@ class NpcTypeBuilder(
         if (resizeY == DEFAULT_RESIZE) resizeY = other.resizeY
         if (contrast == DEFAULT_CONTRAST) contrast = other.contrast
         if (ambient == DEFAULT_AMBIENT) ambient = other.ambient
+        if (familiar == DEFAULT_FAMILIAR) familiar = other.familiar
         if (parameters == DEFAULT_PARAMETERS) parameters = other.intParameters + other.strParameters
     }
 }

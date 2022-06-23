@@ -35,7 +35,15 @@ data class NpcType(
     val resizeY: Int,
     val contrast: Int,
     val ambient: Int,
-    val aBoolean3532: Boolean,
+    val familiar: Boolean,
+    val runAnimation: Int,
+    val runRotate180Animation: Int,
+    val runRotateLeftAnimation: Int,
+    val runRotateRightAnimation: Int,
+    val crawlAnimation: Int,
+    val crawlRotate180Animation: Int,
+    val crawlRotateLeftAnimation: Int,
+    val crawlRotateRightAnimation: Int,
     val intParameters: Map<Int, Int>,
     val strParameters: Map<Int, String>
 ) : ConfigType

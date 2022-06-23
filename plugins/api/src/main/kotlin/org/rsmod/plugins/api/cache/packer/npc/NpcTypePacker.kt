@@ -199,7 +199,7 @@ class NpcTypePacker @Inject constructor(
         if (!clickable) {
             buf.writeByte(109)
         }
-        if (aBoolean3532) {
+        if (familiar) {
             buf.writeByte(111)
         }
         val parameters = intParameters + strParameters

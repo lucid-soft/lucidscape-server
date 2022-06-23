@@ -34,6 +34,11 @@ class XteaFileLoader @Inject constructor(
 }
 
 private data class Xteas(
+    val archive: Int,
+    val group: Int,
+    @JsonProperty("name_hash")
+    val nameHash: Int,
+    val name: String,
     @JsonProperty("mapsquare")
     val mapSquare: Int,
     val key: IntArray

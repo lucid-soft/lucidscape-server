@@ -127,7 +127,21 @@ class NpcTypeLoader @Inject constructor(
             }
             107 -> interact = false
             109 -> clickable = false
-            111 -> aBoolean3532 = true
+            111 -> familiar = true
+            114 -> runAnimation = buf.readUnsignedShort()
+            115 -> {
+                runAnimation = buf.readUnsignedShort()
+                runRotate180Animation = buf.readUnsignedShort()
+                runRotateLeftAnimation = buf.readUnsignedShort()
+                runRotateRightAnimation = buf.readUnsignedShort()
+            }
+            116 -> crawlAnimation = buf.readUnsignedShort()
+            117 -> {
+                crawlAnimation = buf.readUnsignedShort()
+                crawlRotate180Animation = buf.readUnsignedShort()
+                crawlRotateLeftAnimation = buf.readUnsignedShort()
+                crawlRotateRightAnimation = buf.readUnsignedShort()
+            }
             249 -> parameters = buf.readParameters()
             else -> throw IOException("Error unrecognised npc config code: $instruction")
         }

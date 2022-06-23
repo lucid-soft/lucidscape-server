@@ -16,6 +16,6 @@ RS Mod is available under the terms of the ISC license, which is similar to the 
 [license]: https://github.com/rsmod/rsmod/blob/master/LICENSE.md
 [discord]: https://discord.gg/UznZnZR
 [patch]: https://oldschool.runescape.wiki/w/Update:Deadman_Reborn_and_QoL_Changes
-[rev-badge]: https://img.shields.io/badge/revision-199-important
+[rev-badge]: https://img.shields.io/badge/revision-206-red
 [license-badge]: https://img.shields.io/badge/license-ISC-informational
-[discord-badge]: https://img.shields.io/discord/550024461626114053?color=%237289da&logo=discord
+[discord-badge]: https://img.shields.io/discord/978715859361079307?color=%237289da&logo=discord
