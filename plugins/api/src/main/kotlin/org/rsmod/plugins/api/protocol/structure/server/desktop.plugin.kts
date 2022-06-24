@@ -23,7 +23,7 @@ packets.register<UpdateStat> {
     opcode = 55
     write {
         it.writeByteSub(skill)
-        it.writeIntLE(xp)
+        it.writeInt(xp)
         it.writeByteAdd(currLevel)
     }
 }

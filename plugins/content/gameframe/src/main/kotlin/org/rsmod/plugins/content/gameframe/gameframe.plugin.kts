@@ -44,6 +44,11 @@ frames.register {
         target = "activity_tab_fixed"
     }
     component {
+        name = "account_progress_tab"
+        inter = "account_progress_tab"
+        target = "account_progress_tab_fixed"
+    }
+    component {
         name = "inventory_tab"
         inter = "inventory_tab"
         target = "inventory_tab_fixed"
@@ -67,6 +72,11 @@ frames.register {
         name = "group_chat_tab"
         inter = "group_chat_tab"
         target = "group_chat_tab_fixed"
+    }
+    component {
+        name = "friend_chat_tab"
+        inter = "friend_chat_tab"
+        target = "friend_chat_tab_fixed"
     }
     component {
         name = "social_tab"
