@@ -1,4 +1,4 @@
-# RS Mod
+# Lucid Scape
 [![revision][rev-badge]][patch] [![license][license-badge]][isc] [![chat][discord-badge]][discord]
 
 A RuneScape game-server emulator.
@@ -14,8 +14,8 @@ RS Mod is available under the terms of the ISC license, which is similar to the 
 
 [isc]: https://opensource.org/licenses/ISC
 [license]: https://github.com/rsmod/rsmod/blob/master/LICENSE.md
-[discord]: https://discord.gg/UznZnZR
-[patch]: https://oldschool.runescape.wiki/w/Update:Deadman_Reborn_and_QoL_Changes
+[discord]: https://discord.gg/mTPaSsdz
+[patch]: https://oldschool.runescape.wiki/w/Update:Giants%27_Foundry
 [rev-badge]: https://img.shields.io/badge/revision-206-red
 [license-badge]: https://img.shields.io/badge/license-ISC-informational
-[discord-badge]: https://img.shields.io/discord/978715859361079307?color=%237289da&logo=discord
+[discord-badge]: https://img.shields.io/discord/978715859361079307?logo=discord
