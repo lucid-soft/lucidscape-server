@@ -18,51 +18,56 @@ import kotlin.math.min
 val structures: DevicePacketStructureMap by inject()
 val packets = structures.server(Device.Desktop)
 
-
+// DONE
 packets.register<UpdateStat> {
-    opcode = 19
+    opcode = 55
     write {
-        it.writeByteSub(currLevel)
-        it.writeIntME(xp)
         it.writeByteSub(skill)
+        it.writeIntLE(xp)
+        it.writeByteAdd(currLevel)
     }
 }
 
-packets.register<IfSetText> {
+/*packets.register<IfSetText> {
     opcode = 23
     length = PacketLength.Short
     write {
         it.writeStringCP1252(text)
         it.writeInt(component)
     }
-}
+}*/
 
+// DONE
 packets.register<PlayerInfo> {
-    opcode = 47
+    opcode = 54
     length = PacketLength.Short
     write {
         it.writeBytes(buffer)
     }
 }
-
+// DONE
 packets.register<IfOpenSub> {
-    opcode = 53
+    opcode = 49
     write {
-        it.writeShortAdd(interfaceId)
         it.writeInt(targetComponent)
         it.writeByte(clickMode)
-    }
-}
-
-packets.register<IfOpenTop> {
-    opcode = 62
-    write {
         it.writeShort(interfaceId)
+        println("targetComponent = $targetComponent")
+        println("clickMode = $clickMode")
+        println("interfaceId = $interfaceId")
+
     }
 }
-
+// DONE
+packets.register<IfOpenTop> {
+    opcode = 48
+    write {
+        it.writeShortAddLE(interfaceId)
+    }
+}
+// DONE
 packets.register<MessageGame> {
-    opcode = 66
+    opcode = 38
     length = PacketLength.Byte
     write {
         it.writeSmallSmart(type)
@@ -73,19 +78,29 @@ packets.register<MessageGame> {
         it.writeStringCP1252(text)
     }
 }
+
+// DONE
 packets.register<UpdateRunEnergy> {
-    opcode = 73
+    opcode = 75
     write {
         it.writeByte(energy)
     }
 }
 
+// DONE
 packets.register<ResetClientVarCache> {
-    opcode = 90
+    opcode = 43
     write {}
 }
-
-packets.register<ResetAnims> {
+// DONE
+packets.register<MinimapFlagSet> {
+    opcode = 25
+    write {
+        it.writeByte(x)
+        it.writeByte(y)
+    }
+}
+/*packets.register<ResetAnims> {
     opcode = 64
     write {}
 }
@@ -96,26 +111,28 @@ packets.register<NpcInfoSmallViewport> {
     write {
         it.writeBytes(buffer)
     }
-}
-
+}*/
+// DONE
 packets.register<VarpSmall> {
-    opcode = 44
+    opcode = 96
     write {
-        it.writeShort(id)
-        it.writeByteAdd(value)
+        it.writeShortAddLE(id)
+        it.writeByteSub(value)
     }
 }
-
+// DONE
 packets.register<VarpLarge> {
-    opcode = 31
+    opcode = 72
     write {
-        it.writeShortLE(id)
+        it.writeShortAddLE(id)
         it.writeIntLE(value)
     }
 }
+
+// DONE
 val logger = InlineLogger()
 packets.register<RunClientScript> {
-    opcode = 92
+    opcode = 0
     length = PacketLength.Short
     write {
         val types = CharArray(args.size) { i -> if (args[i] is String) 's' else 'i' }
@@ -130,8 +147,9 @@ packets.register<RunClientScript> {
     }
 }
 
+// DONE
 packets.register<RebuildNormal> {
-    opcode = 94
+    opcode = 46
     length = PacketLength.Short
     write {
         val xteas = xteasBuffer(viewport, xteas)
@@ -142,6 +160,7 @@ packets.register<RebuildNormal> {
     }
 }
 
+/*
 packets.register<UpdateInvFull> {
     opcode = 13
     length = PacketLength.Short
@@ -162,6 +181,7 @@ packets.register<UpdateInvPartial> {
         it.writePartialItemContainer(updated)
     }
 }
+*/
 
 fun xteasBuffer(viewport: List<MapSquare>, xteasRepository: XteaRepository): ByteBuf {
     val buf = Unpooled.buffer(Short.SIZE_BYTES + (Int.SIZE_BYTES * 4 * 4))

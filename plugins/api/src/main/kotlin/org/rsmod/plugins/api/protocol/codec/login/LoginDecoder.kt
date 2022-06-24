@@ -181,7 +181,6 @@ class LoginDecoder(
             buf.skipBytes(Byte.SIZE_BYTES)
             password = buf.readStringCP1252()
         }
-
         return LoginSecureBlock(
             password = password,
             authCode = authCode?.code,
@@ -219,7 +218,7 @@ class LoginDecoder(
             out.add(ResponseType.INVALID_CREDENTIALS)
             return
         }
-
+        val clientType = buf.readByte()
         val settings = buf.readClientSettings()
         val uuid = ByteArray(RANDOM_UUID_BYTE_LENGTH) { buf.readByte() }
 
@@ -253,7 +252,7 @@ class LoginDecoder(
                 }
                 // out.add(ResponseType.JS5_OUT_OF_DATE)
 
-                return
+                // return
             }
         }
 

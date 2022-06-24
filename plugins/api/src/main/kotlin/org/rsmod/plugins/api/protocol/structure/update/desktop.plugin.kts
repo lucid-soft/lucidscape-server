@@ -13,6 +13,7 @@ val structures: DevicePacketStructureMap by inject()
 val masks = structures.playerUpdate(Device.Desktop)
 
 masks.order {
+    -DirectionMask::class
     -MovementTempMask::class
     // Exact Movement Mask
     -MovementPermMask::class
@@ -22,13 +23,12 @@ masks.order {
     // Chat Mask
     // Graphics Mask
     -AppearanceMask::class
-    -DirectionMask::class
     // Hit Mask
     // Click Ops Mask (Used for Games Room)
 }
 
 masks.register<BitMask> {
-    mask = 4
+    mask = 128
     write {
         if (packed >= 255) {
             val bitmask = packed or mask
@@ -39,30 +39,9 @@ masks.register<BitMask> {
         }
     }
 }
-
-masks.register<DirectionMask> {
-    mask = 128
-    write {
-        it.writeShortLE(angle)
-    }
-}
-
-masks.register<MovementPermMask> {
-    mask = 8192
-    write {
-        it.writeByteSub(type)
-    }
-}
-
-masks.register<MovementTempMask> {
-    mask = 512
-    write {
-        it.writeByteAdd(type)
-    }
-}
-
+// DONE
 masks.register<AppearanceMask> {
-    mask = 2
+    mask = 16
     write {
         val appBuf = it.alloc().buffer()
         appBuf.writeByte(gender)
@@ -88,8 +67,31 @@ masks.register<AppearanceMask> {
         appBuf.writeByte(combatLevel)
         appBuf.writeShort(0) /* unknown */
         appBuf.writeBoolean(invisible)
+        appBuf.writeShort(32768)
 
         it.writeByte(appBuf.writerIndex())
+        println("Readable bytes: ${appBuf.writerIndex()}")
         it.writeBytesAdd(appBuf)
+    }
+}
+// DONE
+masks.register<DirectionMask> {
+    mask = 8
+    write {
+        it.writeShortAddLE(angle)
+    }
+}
+
+masks.register<MovementPermMask> {
+    mask = 16384
+    write {
+        it.writeByteSub(type)
+    }
+}
+
+masks.register<MovementTempMask> {
+    mask = 256
+    write {
+        it.writeByteSub(type)
     }
 }

@@ -52,6 +52,7 @@ object LoginEncoder : MessageToByteEncoder<LoginResponse>() {
         writeBoolean(response.moderator)
         writeShort(response.playerIndex)
         writeBoolean(response.members)
+        writeLong(1)
 
         val length = writerIndex() - start
         setByte(start, length)

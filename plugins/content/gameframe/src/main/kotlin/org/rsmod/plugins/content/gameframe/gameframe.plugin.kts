@@ -29,11 +29,6 @@ frames.register {
         target = "frame_orbs_fixed"
     }
     component {
-        name = "pvp_skull"
-        inter = "pvp_skull"
-        target = "pvp_skull_fixed"
-    }
-    component {
         name = "attack_tab"
         inter = "attack_tab"
         target = "attack_tab_fixed"
@@ -69,9 +64,9 @@ frames.register {
         target = "magic_tab_fixed"
     }
     component {
-        name = "clan_chat_tab"
-        inter = "clan_chat_tab"
-        target = "clan_chat_tab_fixed"
+        name = "group_chat_tab"
+        inter = "group_chat_tab"
+        target = "group_chat_tab_fixed"
     }
     component {
         name = "social_tab"
