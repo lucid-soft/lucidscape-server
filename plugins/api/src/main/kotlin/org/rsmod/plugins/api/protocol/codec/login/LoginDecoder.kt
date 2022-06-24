@@ -251,7 +251,8 @@ class LoginDecoder(
                     "Cache crc out-of-date (archive=$i, clientCrc=$received, " +
                         "serverCrc=$expected, username=$username, channel=${channel()})"
                 }
-                out.add(ResponseType.JS5_OUT_OF_DATE)
+                // out.add(ResponseType.JS5_OUT_OF_DATE)
+
                 return
             }
         }
