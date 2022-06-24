@@ -70,7 +70,6 @@ masks.register<AppearanceMask> {
         appBuf.writeShort(32768)
 
         it.writeByte(appBuf.writerIndex())
-        println("Readable bytes: ${appBuf.writerIndex()}")
         it.writeBytesAdd(appBuf)
     }
 }

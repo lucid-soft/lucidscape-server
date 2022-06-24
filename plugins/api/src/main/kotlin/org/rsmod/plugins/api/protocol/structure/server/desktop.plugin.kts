@@ -52,10 +52,6 @@ packets.register<IfOpenSub> {
         it.writeInt(targetComponent)
         it.writeByte(clickMode)
         it.writeShort(interfaceId)
-        println("targetComponent = $targetComponent")
-        println("clickMode = $clickMode")
-        println("interfaceId = $interfaceId")
-
     }
 }
 // DONE
