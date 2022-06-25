@@ -79,7 +79,7 @@ packets.register<ClientPacket> {
 
 packets.register<ClientPacket> {
     opcode = 13
-    length = -2
+    length = -1
 }
 packets.register<ClientPacket> {
     opcode = 14
@@ -277,9 +277,16 @@ packets.register<ClientPacket> {
     opcode = 62
     length = -1
 }
-packets.register<ClientPacket> {
+packets.register<MoveGameClick> {
     opcode = 63
     length = -1
+    handler = GameClickHandler::class
+    read {
+        val type = readByte().toInt()
+        val x = readShort().toInt()
+        val y = readShortLE().toInt()
+        MoveGameClick(x, y, type)
+    }
 }
 packets.register<ClientPacket> {
     opcode = 64
@@ -369,9 +376,23 @@ packets.register<ClientPacket> {
     opcode = 85
     length = 4
 }
-packets.register<EventMouseMove> {
+packets.register<MoveMinimapClick> {
     opcode = 86
     length = -1
+    handler = MinimapClickHandler::class
+    read {
+        val type = readByte().toInt()
+        val x = readShort().toInt()
+        val y = readShortLE().toInt()
+        val something1 = readByte().toInt()
+        val something2 = readByte().toInt()
+        val camAngleY = readShort().toInt()
+        skipBytes(4)
+        val localPlayerX = readShort()
+        val localPlayerY = readShort()
+        skipBytes(1)
+        MoveMinimapClick(x, y, type)
+    }
 }
 packets.register<ClientPacket> {
     opcode = 87

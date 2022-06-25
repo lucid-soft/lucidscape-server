@@ -1,6 +1,9 @@
 package org.rsmod.plugins.api.protocol.structure.update
 
-import io.guthix.buffer.*
+import io.guthix.buffer.writeByteSub
+import io.guthix.buffer.writeBytesAdd
+import io.guthix.buffer.writeShortAddLE
+import io.guthix.buffer.writeStringCP1252
 import org.rsmod.plugins.api.protocol.Device
 import org.rsmod.plugins.api.protocol.packet.update.AppearanceMask
 import org.rsmod.plugins.api.protocol.packet.update.BitMask

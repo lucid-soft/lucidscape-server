@@ -1,21 +1,23 @@
 package org.rsmod.util.runelite
 
-import io.nozemi.runescape.tools.runelite.PluginHubConstants.PLUGIN_HUB_BASE_PATH
-import io.nozemi.runescape.tools.runelite.PluginHubConstants.PLUGIN_HUB_DUMMY_TEXT_FILE
-import io.nozemi.runescape.tools.runelite.PluginHubConstants.PLUGIN_HUB_KEY_PATH
-import io.nozemi.runescape.tools.runelite.PluginHubConstants.PLUGIN_HUB_PRIVATE_KEY
-import io.nozemi.runescape.tools.runelite.PluginHubConstants.PLUGIN_HUB_PUBLIC_KEY
+import org.rsmod.util.runelite.PluginHubConstants.PLUGIN_HUB_BASE_PATH
+import org.rsmod.util.runelite.PluginHubConstants.PLUGIN_HUB_DUMMY_TEXT_FILE
+import org.rsmod.util.runelite.PluginHubConstants.PLUGIN_HUB_KEY_PATH
+import org.rsmod.util.runelite.PluginHubConstants.PLUGIN_HUB_PRIVATE_KEY
+import org.rsmod.util.runelite.PluginHubConstants.PLUGIN_HUB_PUBLIC_KEY
 import java.io.BufferedReader
 import java.io.ByteArrayInputStream
 import java.io.FileReader
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
-import java.security.*
+import java.security.KeyFactory
+import java.security.PrivateKey
+import java.security.Signature
 import java.security.cert.Certificate
 import java.security.cert.CertificateFactory
 import java.security.spec.PKCS8EncodedKeySpec
-import java.util.*
+import java.util.Base64
 
 /**
  * Validate your public and private key used with RuneLite Plugin hub.
@@ -48,8 +50,9 @@ class KeyValidator {
         if (!Files.exists(Path.of(PLUGIN_HUB_BASE_PATH, PLUGIN_HUB_KEY_PATH, PLUGIN_HUB_PRIVATE_KEY))) {
             error(
                 "You need to generate the public and private key with this command:\n" +
-                        "cd \"${Path.of(PLUGIN_HUB_BASE_PATH, PLUGIN_HUB_KEY_PATH).toAbsolutePath()}\" && " +
-                        "openssl req -x509 -newkey rsa:1024 -keyout private.pem -out externalplugins.crt -days 365 -nodes"
+                    "cd \"${Path.of(PLUGIN_HUB_BASE_PATH, PLUGIN_HUB_KEY_PATH).toAbsolutePath()}\" && " +
+                    "openssl req -x509 -newkey rsa:1024 -keyout private.pem -out externalplugins.crt -days 365 " +
+                    "-nodes"
             )
         }
 

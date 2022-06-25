@@ -8,14 +8,18 @@ import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.mashape.unirest.http.HttpResponse
 import com.mashape.unirest.http.JsonNode
 import com.mashape.unirest.http.Unirest
-import io.nozemi.runescape.tools.runelite.PluginHubConstants.PLUGIN_HUB_BASE_PATH
-import io.nozemi.runescape.tools.runelite.PluginHubConstants.PLUGIN_HUB_KEY_PATH
-import io.nozemi.runescape.tools.runelite.PluginHubConstants.PLUGIN_HUB_OUTPUT_DIRECTORY
-import io.nozemi.runescape.tools.runelite.PluginHubConstants.PLUGIN_HUB_PRIVATE_KEY
-import io.nozemi.runescape.tools.runelite.PluginHubConstants.PLUGIN_HUB_PUBLIC_KEY
+import org.rsmod.util.runelite.PluginHubConstants.PLUGIN_HUB_BASE_PATH
+import org.rsmod.util.runelite.PluginHubConstants.PLUGIN_HUB_KEY_PATH
+import org.rsmod.util.runelite.PluginHubConstants.PLUGIN_HUB_OUTPUT_DIRECTORY
+import org.rsmod.util.runelite.PluginHubConstants.PLUGIN_HUB_PRIVATE_KEY
+import org.rsmod.util.runelite.PluginHubConstants.PLUGIN_HUB_PUBLIC_KEY
 import org.json.JSONArray
 import org.json.JSONObject
-import java.io.*
+import java.io.DataInputStream
+import java.io.File
+import java.io.InputStream
+import java.io.BufferedReader
+import java.io.FileReader
 import java.nio.ByteBuffer
 import java.nio.file.Files
 import java.nio.file.Path
@@ -27,7 +31,8 @@ import java.security.cert.Certificate
 import java.security.cert.CertificateException
 import java.security.cert.CertificateFactory
 import java.security.spec.PKCS8EncodedKeySpec
-import java.util.*
+import java.util.Base64
+import kotlin.Comparator
 
 object PluginDownloader {
 
@@ -35,14 +40,14 @@ object PluginDownloader {
         .registerKotlinModule()
         .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
 
-    //private val wantedPlugins = arrayListOf(
+    // private val wantedPlugins = arrayListOf(
     //    "117hd",
     //    "zulrah-helper",
     //    "skills-tab-progress-bars",
     //    "resource-packs",
     //    "the-gauntlet",
     //    "equipment-inspector"
-    //)
+    // )
 
     @JvmStatic
     fun main(args: Array<String>) {
@@ -110,7 +115,6 @@ object PluginDownloader {
         Files.write(Paths.get(PLUGIN_HUB_BASE_PATH, PLUGIN_HUB_OUTPUT_DIRECTORY, "manifest.js"), arr)
     }
 
-
     private fun download(version: String, plugin: String, file: String) {
 
         println("plugin: $plugin downloading: $file")
@@ -150,14 +154,18 @@ object PluginDownloader {
     private fun getLatestRuneLiteVersion(): String {
         val response: HttpResponse<JsonNode> =
             Unirest.get("https://api.github.com/repos/runelite/runelite/tags").asJson()
-        return response.body.array.getJSONObject(0).getString("name").replace("runelite-parent-", "")
+        return response.body.array.getJSONObject(0).getString("name").replace(
+            "runelite-parent-",
+            ""
+        )
     }
 
     private fun loadRuneLiteCertificate(): Certificate? {
         if (!Files.exists(Paths.get(PLUGIN_HUB_BASE_PATH, PLUGIN_HUB_PUBLIC_KEY))) {
             error(
-                "You need to grab RuneLite's externalplugins.crt in order to download plugins from RuneLite's plugin hub!\n" +
-                        "Put it here: ${Paths.get(PLUGIN_HUB_BASE_PATH).toAbsolutePath()}"
+                "You need to grab RuneLite's externalplugins.crt in order to download plugins from RuneLite's plugin " +
+                    "hub!\n" +
+                    "Put it here: ${Paths.get(PLUGIN_HUB_BASE_PATH).toAbsolutePath()}"
             )
         }
 

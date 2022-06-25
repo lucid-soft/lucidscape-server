@@ -14,7 +14,6 @@ interface_122: 122
 interface_728: 728
 skill_tab: 320
 activity_tab: 629
-combat_ov_tab: 712
 inventory_tab: 149
 equipment_tab: 387
 prayer_tab: 541
@@ -26,6 +25,8 @@ settings_tab: 116
 emotes_tab: 216
 music_tab: 239
 group_chat_tab: 707
+friend_chat_tab: 701
 attack_tab: 593
 clan_chat_tab: 7
 quest_tab: 399
+account_progress_tab: 712

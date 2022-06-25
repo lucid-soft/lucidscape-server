@@ -9,7 +9,6 @@ import org.rsmod.game.model.domain.repo.XteaRepository
 import org.rsmod.game.model.item.Item
 import org.rsmod.game.model.map.MapSquare
 import org.rsmod.plugins.api.protocol.Device
-import org.rsmod.plugins.api.protocol.packet.client.ReflectionCheckReply
 import org.rsmod.plugins.api.protocol.packet.server.*
 import org.rsmod.plugins.api.protocol.structure.DevicePacketStructureMap
 import org.rsmod.util.security.Xtea

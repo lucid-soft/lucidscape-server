@@ -1,4 +1,4 @@
-package io.nozemi.runescape.tools.runelite
+package org.rsmod.util.runelite
 
 object PluginHubConstants {
     const val PLUGIN_HUB_BASE_PATH = "./plugin-hub"
