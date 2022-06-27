@@ -273,9 +273,14 @@ packets.register<ClientPacket> {
     opcode = 61
     length = 3
 }
-packets.register<ClientPacket> {
+packets.register<ClientCheat> {
     opcode = 62
     length = -1
+    handler = ClientCheatHandler::class
+    read {
+        val input = readStringCP1252()
+        ClientCheat(input)
+    }
 }
 packets.register<MoveGameClick> {
     opcode = 63

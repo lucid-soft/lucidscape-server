@@ -36,6 +36,6 @@ class ClientCheatHandler @Inject constructor(
 
     private fun Player.hasAnyPrivilege(other: Collection<Privilege>): Boolean {
         if (other.isEmpty()) return true
-        return privileges.intersect(other).isNotEmpty()
+        return privileges.intersect(other.toSet()).isNotEmpty()
     }
 }
