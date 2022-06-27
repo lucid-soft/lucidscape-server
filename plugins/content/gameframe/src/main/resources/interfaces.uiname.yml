@@ -25,8 +25,9 @@ settings_tab: 116
 emotes_tab: 216
 music_tab: 239
 group_chat_tab: 707
-friend_chat_tab: 701
 attack_tab: 593
-clan_chat_tab: 7
-quest_tab: 399
+friend_chat_tab: 7
+clan_chat_tab: 701
+guest_chat_tab: 702
 account_progress_tab: 712
+quest_tab: 399

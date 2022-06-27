@@ -74,6 +74,11 @@ frames.register {
         target = "group_chat_tab_fixed"
     }
     component {
+        name = "friend_chat_tab"
+        inter = "friend_chat_tab"
+        target = "friend_chat_tab_fixed"
+    }
+    component {
         name = "social_tab"
         inter = "social_tab"
         target = "social_tab_fixed"
