@@ -69,7 +69,7 @@
   parent: gameframe_fixed
   child: 86
 - name: friend_chat_tab_fixed
-  parent: friend_chat_tab
+  parent: group_chat_tab
   child: 7
 - name: attack_tab_fixed
   parent: gameframe_fixed

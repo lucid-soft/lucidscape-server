@@ -17,6 +17,16 @@ import kotlin.math.min
 val structures: DevicePacketStructureMap by inject()
 val packets = structures.server(Device.Desktop)
 
+packets.register<IfSetEvents> {
+    opcode = 1
+    write {
+        it.writeIntME(events)
+        it.writeShortLE(dynamic.last)
+        it.writeIntIME(component)
+        it.writeShortAdd(dynamic.first)
+    }
+}
+
 // DONE
 packets.register<UpdateStat> {
     opcode = 55
@@ -27,14 +37,14 @@ packets.register<UpdateStat> {
     }
 }
 
-/*packets.register<IfSetText> {
-    opcode = 23
+packets.register<IfSetText> {
+    opcode = 52
     length = PacketLength.Short
     write {
         it.writeStringCP1252(text)
-        it.writeInt(component)
+        it.writeIntIME(component)
     }
-}*/
+}
 
 // DONE
 packets.register<PlayerInfo> {
@@ -155,12 +165,11 @@ packets.register<RebuildNormal> {
     }
 }
 
-/*
 packets.register<UpdateInvFull> {
-    opcode = 13
+    opcode = 67
     length = PacketLength.Short
     write {
-        it.writeInt(component)
+        it.writeInt(-1)
         it.writeShort(key)
         it.writeShort(items.size)
         it.writeFullItemContainer(items)
@@ -168,15 +177,14 @@ packets.register<UpdateInvFull> {
 }
 
 packets.register<UpdateInvPartial> {
-    opcode = 69
+    opcode = 37
     length = PacketLength.Short
     write {
-        it.writeInt(component)
+        it.writeInt(-1)
         it.writeShort(key)
         it.writePartialItemContainer(updated)
     }
 }
-*/
 
 fun xteasBuffer(viewport: List<MapSquare>, xteasRepository: XteaRepository): ByteBuf {
     val buf = Unpooled.buffer(Short.SIZE_BYTES + (Int.SIZE_BYTES * 4 * 4))
@@ -192,11 +200,11 @@ fun ByteBuf.writeFullItemContainer(items: List<Item?>) {
     items.forEach { item ->
         val id = (item?.id ?: -1) + 1
         val amount = (item?.amount ?: 0)
-        writeByte(min(255, amount))
+        writeByteNeg(min(255, amount))
         if (amount >= 255) {
-            writeIntME(item?.amount ?: 0)
+            writeInt(item?.amount ?: 0)
         }
-        writeShortAddLE(id)
+        writeShort(id)
     }
 }
 
