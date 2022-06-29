@@ -13,6 +13,7 @@ internal val MovementSpeed.stepCount: Int
     get() = when (this) {
         MovementSpeed.Run -> 2
         MovementSpeed.Walk -> 1
+        MovementSpeed.Crawl -> 0
     }
 
 internal fun MovementQueue.pollSteps(src: Coordinates, speed: MovementSpeed, collision: CollisionMap) {

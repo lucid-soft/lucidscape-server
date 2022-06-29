@@ -58,6 +58,7 @@ fun Player.closeChatBoxModal() {
 
 fun Player.moveTo(destination: Coordinates, speed: MovementSpeed = this.speed, noclip: Boolean = false) {
     val type = when (speed) {
+        MovementSpeed.Crawl -> MoveType.ForceCrawl
         MovementSpeed.Walk -> MoveType.ForceWalk
         MovementSpeed.Run -> MoveType.ForceRun
     }

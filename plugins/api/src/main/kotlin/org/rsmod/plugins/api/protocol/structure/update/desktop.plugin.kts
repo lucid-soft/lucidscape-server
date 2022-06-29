@@ -17,9 +17,9 @@ val masks = structures.playerUpdate(Device.Desktop)
 
 masks.order {
     -DirectionMask::class
-    -MovementTempMask::class
     // Exact Movement Mask
     -MovementPermMask::class
+    -MovementTempMask::class
     // Animation Mask
     // Force Chat Mask
     // Face Entity Mask
@@ -85,14 +85,14 @@ masks.register<DirectionMask> {
 }
 
 masks.register<MovementPermMask> {
-    mask = 16384
+    mask = 256
     write {
         it.writeByteSub(type)
     }
 }
 
 masks.register<MovementTempMask> {
-    mask = 256
+    mask = 16384
     write {
         it.writeByteSub(type)
     }
