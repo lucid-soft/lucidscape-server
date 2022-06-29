@@ -77,7 +77,7 @@ packets.register<ClientPacket> {
     length = -2
 }
 
-packets.register<ClientPacket> {
+packets.register<LoginTimings> {
     opcode = 13
     length = -1
 }
@@ -293,7 +293,7 @@ packets.register<MoveGameClick> {
         MoveGameClick(x, y, type)
     }
 }
-packets.register<ClientPacket> {
+packets.register<NoTimeout> {
     opcode = 64
     length = 0
 }
@@ -373,7 +373,7 @@ packets.register<ClientPacket> {
     opcode = 83
     length = 8
 }
-packets.register<ClientPacket> {
+packets.register<MapBuildComplete> {
     opcode = 84
     length = 0
 }
@@ -439,9 +439,14 @@ packets.register<ClientPacket> {
     opcode = 96
     length = -1
 }
-packets.register<ClientPacket> {
+packets.register<EventAppletFocus> {
     opcode = 97
     length = 1
+    handler = AppletFocusHandler::class
+    read {
+        val hasFocus = readByte().toInt() == 1
+        EventAppletFocus(hasFocus)
+    }
 }
 packets.register<ClientPacket> {
     opcode = 98
@@ -463,7 +468,7 @@ packets.register<ClientPacket> {
     opcode = 102
     length = 4
 }
-packets.register<ClientPacket> {
+packets.register<WindowStatus> {
     opcode = 103
     length = 5
 }

@@ -42,7 +42,7 @@ masks.register<BitMask> {
         }
     }
 }
-// DONE
+
 masks.register<AppearanceMask> {
     mask = 16
     write {
@@ -76,7 +76,7 @@ masks.register<AppearanceMask> {
         it.writeBytesAdd(appBuf)
     }
 }
-// DONE
+
 masks.register<DirectionMask> {
     mask = 8
     write {
