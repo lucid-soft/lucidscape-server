@@ -175,7 +175,8 @@ class NpcUpdateTask @Inject constructor(
         val walkRot = DIRECTION_ROT[walkStep?.dir] ?: 0
         val runRot = DIRECTION_ROT[runStep?.dir]
         val running = runRot != null
-        writeBits(value = if (running) 2 else 1, amount = 2)
+        // TODO add crawl speed
+        writeBits(value = if (running) 2 else if (false) 3 else 1, amount = 2)
         writeBits(value = walkRot, amount = 3)
         if (running && runRot != null) {
             writeBits(value = runRot, amount = 3)
@@ -196,12 +197,14 @@ class NpcUpdateTask @Inject constructor(
         val npcId = if (npc.entity.transform != -1) npc.entity.transform else npc.id
         val rotation = DIRECTION_ROT.getValue(npc.faceDirection())
         writeBits(value = npc.index, amount = 15)
-        writeBits(value = diffX, amount = if (largeViewport) 8 else 5)
-        writeBits(value = npcId, amount = 14)
+
         writeBits(value = rotation, amount = 3)
-        writeBoolean(maskUpdate)
-        writeBoolean(false) /* not walking */
+        writeBits(value = diffX, amount = if (largeViewport) 8 else 5)
+        writeBoolean(false)
         writeBits(value = diffY, amount = if (largeViewport) 8 else 5)
+        writeBoolean(false) /* not walking */
+        writeBoolean(maskUpdate)
+        writeBits(value = npcId, amount = 14)
     }
 
     private fun ByteBuf.writeMaskUpdate(
