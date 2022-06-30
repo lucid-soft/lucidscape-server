@@ -24,6 +24,7 @@ onOpenOverlay(inter("character_summary")) {
 }
 
 onOpenOverlay(inter("quests")) {
+    player.runClientScript(828, 1) // sets player as a member
     player.setComponentEvents(component("quests_inner"), 0 .. 180, InterfaceEvent.BUTTON1, InterfaceEvent.BUTTON2, InterfaceEvent.BUTTON3, InterfaceEvent.BUTTON4, InterfaceEvent.BUTTON5)
 }
 
@@ -49,10 +50,10 @@ buttonNames.forEachIndexed { index, name ->
 
 val interNames = listOf("character_summary", "quests", "achievement_diaries", "kourend_favour")
 
-fun Player.openActivityTab(type: Int) {
-    openOverlay(inter(interNames[type]), component("activity_tab_inner"))
+fun Player.openActivityTab(index: Int) {
+    openOverlay(inter(interNames[index]), component("activity_tab_inner"))
 }
 
-fun Player.closeActivityTab(type: Int) {
-    closeOverlay(inter(interNames[type]))
+fun Player.closeActivityTab(index: Int) {
+    closeOverlay(inter(interNames[index]))
 }

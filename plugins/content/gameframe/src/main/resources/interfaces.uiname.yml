@@ -28,7 +28,8 @@ chat_channel_tab: 707
 attack_tab: 593
 friend_chat: 7
 clan_chat: 701
-guest_chat: 702
+guest_clan_chat: 702
+grouping: 76
 character_summary: 712
 quests: 399
 achievement_diaries: 259

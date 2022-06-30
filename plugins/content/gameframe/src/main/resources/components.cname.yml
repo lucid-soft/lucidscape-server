@@ -53,3 +53,21 @@
 - name: kourend_favour_button
   parent: activity_tab
   child: 18
+- name: chat_channel_tab_inner
+  parent: chat_channel_tab
+  child: 7
+- name: friend_chat_button
+  parent: chat_channel_tab
+  child: 3
+- name: clan_chat_button
+  parent: chat_channel_tab
+  child: 4
+- name: guest_clan_chat_button
+  parent: chat_channel_tab
+  child: 5
+- name: grouping_button
+  parent: chat_channel_tab
+  child: 6
+- name: grouping_inner
+  parent: grouping
+  child: 26
