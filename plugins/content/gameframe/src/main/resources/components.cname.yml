@@ -22,7 +22,34 @@
   child: 30
 - name: run_orb_button
   parent: frame_orbs
-  child: 22
+  child: 23
+- name: prayer_orb_button
+  parent: frame_orbs
+  child: 15
 - name: logout_button
   parent: logout_tab
   child: 8
+- name: activity_tab_inner
+  parent: activity_tab
+  child: 33
+- name: character_summary_inner
+  parent: character_summary
+  child: 3
+- name: quests_inner
+  parent: quests
+  child: 7
+- name: achievement_diaries_inner
+  parent: achievement_diaries
+  child: 2
+- name: character_summary_button
+  parent: activity_tab
+  child: 3
+- name: quests_button
+  parent: activity_tab
+  child: 8
+- name: achievement_diary_button
+  parent: activity_tab
+  child: 13
+- name: kourend_favour_button
+  parent: activity_tab
+  child: 18

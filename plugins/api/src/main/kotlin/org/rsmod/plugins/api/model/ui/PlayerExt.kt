@@ -112,7 +112,7 @@ fun Player.openOverlay(
 }
 
 fun Player.closeOverlay(overlay: UserInterface) {
-    val entry = ui.modals.entries.firstOrNull { it.value == overlay }
+    val entry = ui.overlays.entries.firstOrNull { it.value == overlay }
     if (entry == null) {
         warn { "Interface list does not contain overlay (overlay=$overlay)" }
         return

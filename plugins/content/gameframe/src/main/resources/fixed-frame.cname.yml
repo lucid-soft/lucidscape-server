@@ -32,9 +32,6 @@
 - name: activity_tab_fixed
   parent: gameframe_fixed
   child: 81
-- name: account_progress_tab_fixed
-  parent: activity_tab
-  child: 33
 - name: inventory_tab_fixed
   parent: gameframe_fixed
   child: 82
@@ -65,11 +62,11 @@
 - name: music_tab_fixed
   parent: gameframe_fixed
   child: 92
-- name: group_chat_tab_fixed
+- name: chat_channel_tab_fixed
   parent: gameframe_fixed
   child: 86
-- name: friend_chat_tab_fixed
-  parent: group_chat_tab
+- name: friend_chat
+  parent: chat_channel_tab
   child: 7
 - name: attack_tab_fixed
   parent: gameframe_fixed

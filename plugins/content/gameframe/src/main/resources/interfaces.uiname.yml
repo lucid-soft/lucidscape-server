@@ -24,10 +24,13 @@ logout_tab: 182
 settings_tab: 116
 emotes_tab: 216
 music_tab: 239
-group_chat_tab: 707
+chat_channel_tab: 707
 attack_tab: 593
-friend_chat_tab: 7
-clan_chat_tab: 701
-guest_chat_tab: 702
-account_progress_tab: 712
-quest_tab: 399
+friend_chat: 7
+clan_chat: 701
+guest_chat: 702
+character_summary: 712
+quests: 399
+achievement_diaries: 259
+kourend_favour: 245
+

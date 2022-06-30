@@ -26,6 +26,17 @@ data class IfButton(
          * will have a [clickType] of {1}.
          */
         const val TYPE_INDEX_OFFSET = 1
+        const val IF_BUTTON1 = 1
+        const val IF_BUTTON2 = 2
+        const val IF_BUTTON3 = 3
+        const val IF_BUTTON4 = 4
+        const val IF_BUTTON5 = 5
+        const val IF_BUTTON6 = 6
+        const val IF_BUTTON7 = 7
+        const val IF_BUTTON8 = 8
+        const val IF_BUTTON9 = 9
+        const val IF_BUTTON10 = 10
+
     }
 }
 

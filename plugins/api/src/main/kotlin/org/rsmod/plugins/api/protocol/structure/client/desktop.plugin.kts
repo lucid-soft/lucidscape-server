@@ -5,6 +5,7 @@ import io.guthix.buffer.*
 import org.rsmod.game.message.ClientPacket
 import org.rsmod.plugins.api.protocol.Device
 import org.rsmod.plugins.api.protocol.packet.client.*
+import org.rsmod.plugins.api.protocol.packet.client.IfButton.Companion.IF_BUTTON1
 import org.rsmod.plugins.api.protocol.structure.DevicePacketStructureMap
 
 val logger = InlineLogger()
@@ -27,7 +28,7 @@ packets.register<ClientPacket> {
     length = 8
 }
 
-packets.register<ClientPacket> {
+packets.register<EventMouseClick> {
     opcode = 3
     length = 6
 }
@@ -72,7 +73,7 @@ packets.register<ClientPacket> {
     length = 3
 }
 
-packets.register<ClientPacket> {
+packets.register<EventKeyboard> {
     opcode = 12
     length = -2
 }
@@ -129,13 +130,20 @@ packets.register<ClientPacket> {
     opcode = 25
     length = 3
 }
-packets.register<ClientPacket> {
+packets.register<EventMouseMove> {
     opcode = 26
     length = -1
 }
-packets.register<ClientPacket> {
+packets.register<IfButton> {
     opcode = 27
     length = 8
+    handler = IfButtonHandler::class
+    read {
+        val component = readInt()
+        val child = readShort().toInt()
+        val item = readShort().toInt()
+        IfButton(IF_BUTTON1, component, child, item)
+    }
 }
 packets.register<ClientPacket> {
     opcode = 28
@@ -177,9 +185,17 @@ packets.register<ClientPacket> {
     opcode = 37
     length = 3
 }
-packets.register<ClientPacket> {
+packets.register<OpLoc1> {
     opcode = 38
     length = 7
+    handler = OpLoc1Handler::class
+    read {
+        val y = readUnsignedShortAddLE()
+        val x = readUnsignedShortAddLE()
+        val keyMode = readByteNeg().toInt()
+        val id = readShortLE().toInt()
+        OpLoc1(id, x, y, keyMode)
+    }
 }
 packets.register<ClientPacket> {
     opcode = 39
@@ -460,7 +476,7 @@ packets.register<ClientPacket> {
     opcode = 100
     length = -1
 }
-packets.register<ClientPacket> {
+packets.register<EventCameraPosition> {
     opcode = 101
     length = 4
 }

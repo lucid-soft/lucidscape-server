@@ -12,7 +12,7 @@ onCommand("empty") {
     }
 }
 
-onCommand("owner") {
+onCommand("admin") {
     description = "Makes you an admin"
     execute {
         player.privileges.add(Privileges.Mod)
