@@ -157,13 +157,29 @@ packets.register<ClientPacket> {
     opcode = 30
     length = 8
 }
-packets.register<ClientPacket> {
+packets.register<OpLoc4> {
     opcode = 31
     length = 7
+    handler = OpLoc4Handler::class
+    read {
+        val y = readUnsignedShortAddLE()
+        val x = readUnsignedShort()
+        val keyMode = readByteAdd().toInt()
+        val id = readShortAdd().toInt()
+        OpLoc4(id, x, y, keyMode)
+    }
 }
-packets.register<ClientPacket> {
+packets.register<OpLoc5> {
     opcode = 32
     length = 7
+    handler = OpLoc5Handler::class
+    read {
+        val x = readUnsignedShortAddLE()
+        val id = readUnsignedShortAdd()
+        val keyMode = readByte().toInt()
+        val y = readUnsignedShortAddLE()
+        OpLoc5(id, x, y, keyMode)
+    }
 }
 packets.register<ClientPacket> {
     opcode = 33
@@ -249,13 +265,29 @@ packets.register<ClientPacket> {
     opcode = 51
     length = 0
 }
-packets.register<ClientPacket> {
+packets.register<OpLoc2> {
     opcode = 52
     length = 7
+    handler = OpLoc2Handler::class
+    read {
+        val keyMode = readByteAdd().toInt()
+        val y = readUnsignedShort()
+        val x = readUnsignedShort()
+        val id = readShortAddLE().toInt()
+        OpLoc2(id, x, y, keyMode)
+    }
 }
-packets.register<ClientPacket> {
+packets.register<OpLoc3> {
     opcode = 53
     length = 7
+    handler = OpLoc3Handler::class
+    read {
+        val keyMode = readByteNeg().toInt()
+        val x = readUnsignedShortAdd()
+        val y = readUnsignedShortAdd()
+        val id = readShort().toInt()
+        OpLoc3(id, x, y, keyMode)
+    }
 }
 packets.register<ClientPacket> {
     opcode = 54
