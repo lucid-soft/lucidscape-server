@@ -105,11 +105,11 @@ packets.register<MinimapFlagSet> {
         it.writeByte(y)
     }
 }
-/*packets.register<ResetAnims> {
-    opcode = 64
+packets.register<ResetAnims> {
+    opcode = 28
     write {}
 }
-
+/*
 packets.register<NpcInfoSmallViewport> {
     opcode = 43
     length = PacketLength.Short
