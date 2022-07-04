@@ -15,7 +15,6 @@ sealed class MoveType {
     object Neutral : MoveType()
     object ForceWalk : MoveType()
     object ForceRun : MoveType()
-    object ForceCrawl : MoveType()
     object Displace : MoveType()
 }
 

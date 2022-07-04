@@ -70,6 +70,8 @@ sealed class Mob(
 
     fun strongQueue(block: suspend () -> Unit) = queueStack.queue(QueueType.Strong, block)
 
+    fun softQueue(block: suspend () -> Unit) = queueStack.queue(QueueType.Soft, block)
+
     fun clearQueues() = queueStack.clear()
 
     fun displace(coords: Coordinates) {

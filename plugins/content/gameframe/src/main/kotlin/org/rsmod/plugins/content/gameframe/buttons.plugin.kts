@@ -30,7 +30,6 @@ fun Player.toggleRun() {
 fun MovementSpeed.toVarp(): Int = when (this) {
     MovementSpeed.Walk -> 0
     MovementSpeed.Run -> 1
-    MovementSpeed.Crawl -> 0
 }
 
 fun Int.toMovementSpeed(): MovementSpeed = when (this) {

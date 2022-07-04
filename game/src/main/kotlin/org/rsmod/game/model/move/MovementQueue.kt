@@ -6,7 +6,6 @@ import java.util.Queue
 import org.rsmod.game.model.domain.Direction
 
 sealed class MovementSpeed {
-    object Crawl : MovementSpeed()
     object Walk : MovementSpeed()
     object Run : MovementSpeed()
 }

@@ -2,6 +2,7 @@ package org.rsmod.plugins.dev.cmd
 
 import org.rsmod.game.collision.CollisionMap
 import org.rsmod.game.collision.buildFlags
+import org.rsmod.game.coroutine.delay
 import org.rsmod.game.model.client.NpcEntity
 import org.rsmod.game.model.item.Item
 import org.rsmod.game.model.item.container.transaction.add
@@ -18,12 +19,13 @@ import org.rsmod.plugins.api.cache.type.ui.InterfaceTypeList
 import org.rsmod.plugins.api.model.item.definiteName
 import org.rsmod.plugins.api.model.map.toInternalString
 import org.rsmod.plugins.api.model.mob.player.inputInt
+import org.rsmod.plugins.api.model.mob.player.runClientScript
 import org.rsmod.plugins.api.model.mob.player.searchItemCatalogue
 import org.rsmod.plugins.api.model.mob.player.sendMessage
 import org.rsmod.plugins.api.model.stat.Stats
-import org.rsmod.plugins.api.model.ui.closeModal
-import org.rsmod.plugins.api.model.ui.openModal
+import org.rsmod.plugins.api.model.ui.*
 import org.rsmod.plugins.api.onCommand
+import org.rsmod.plugins.api.onOpenTopLevel
 import org.rsmod.plugins.api.privilege.Privileges
 import java.util.concurrent.ThreadLocalRandom
 import java.util.concurrent.TimeUnit
@@ -94,6 +96,20 @@ onCommand("npc") {
         val type = npcTypes[id]
         val npc = Npc(NpcEntity(), type).apply { coords = player.coords }
         npcList.register(npc)
+    }
+}
+
+onCommand("notif") {
+    privilege = Privileges.Admin
+    description = "Sends a test notification"
+    execute {
+        player.softQueue {
+            player.openOverlay(inter("notification"), component("gameframe_fixed_component"))
+            player.runClientScript(3343, "Hello", "This is just a test", -1)
+            delay(12)
+            player.closeOverlay(inter("notification"))
+            player.sendMessage("Test delayed message!")
+        }
     }
 }
 

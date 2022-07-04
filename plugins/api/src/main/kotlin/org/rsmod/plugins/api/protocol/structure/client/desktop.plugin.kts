@@ -221,9 +221,16 @@ packets.register<ClientPacket> {
     opcode = 40
     length = 0
 }
-packets.register<ClientPacket> {
+packets.register<OpHeld2> {
     opcode = 41
     length = 8
+    handler = OpHeld2Handler::class
+    read {
+        val component = readInt()
+        val slot = readShort().toInt()
+        val item = readShort().toInt()
+        OpHeld2(item, component, slot)
+    }
 }
 packets.register<ClientPacket> {
     opcode = 42

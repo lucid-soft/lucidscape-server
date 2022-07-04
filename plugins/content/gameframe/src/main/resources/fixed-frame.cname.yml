@@ -5,6 +5,9 @@
 - name: interface_651_component
   parent: gameframe_fixed
   child: 31
+- name: gameframe_fixed_component
+  parent: gameframe_fixed
+  child: 32
 - name: interface_708_component
   parent: gameframe_fixed
   child: 30

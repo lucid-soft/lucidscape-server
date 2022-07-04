@@ -83,6 +83,7 @@ class GameQueueStack(
     private fun QueueType.overtake(other: QueueType): Boolean = when (this) {
         QueueType.Normal -> other == QueueType.Weak
         QueueType.Strong -> true
+        QueueType.Soft -> true
         else -> false
     }
 }

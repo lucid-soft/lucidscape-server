@@ -26,7 +26,8 @@ class ChannelMessageListener(
         UpdateRunEnergy::class,
         VarpSmall::class,
         VarpLarge::class,
-        RunClientScript::class
+        RunClientScript::class,
+        MinimapFlagSet::class
     )
 
     override fun write(packet: ServerPacket) {
